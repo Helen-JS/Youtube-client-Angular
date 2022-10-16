@@ -1,1 +1,1 @@
-export enum sortType { 'descending', 'ascending' }
+export enum SortType { 'descending', 'ascending' }

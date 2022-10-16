@@ -3,7 +3,7 @@
         <img [src]="srcImgCustomVideo" alt="custom-video-prewiew">
     </div>
 
-    <h2 *ngIf="titleCustomVideo.length < 40; else shortTitle">{{titleCustomVideo}}</h2>
+    <h2 *ngIf="titleCustomVideoLength < 40; else shortTitle">{{titleCustomVideo}}</h2>
 
     <ng-template #shortTitle>
       <h2>{{titleCustomVideo | slice: 0:30}} ...</h2>

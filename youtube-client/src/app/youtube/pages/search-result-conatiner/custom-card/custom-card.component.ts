@@ -14,6 +14,7 @@ import { ICustomVideo } from '../../../../redux/app.state';
 export class CustomCardComponent implements OnInit {
   @Input() customVideo!: ICustomVideo;
   public titleCustomVideo!: string;
+  public titleCustomVideoLength!: number;
   public srcImgCustomVideo!: string;
   public publicationAgeCustomVideo!: number;
   constructor(
@@ -23,6 +24,7 @@ export class CustomCardComponent implements OnInit {
   ngOnInit(): void {
     if (this.customVideo) {
       this.titleCustomVideo = this.customVideo.title;
+      this.titleCustomVideoLength = this.customVideo.title.length;
       this.srcImgCustomVideo = this.customVideo.img;
       this.publicationAgeCustomVideo = Date.now() - Date.parse(this.customVideo.date);
     }

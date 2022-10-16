@@ -1,20 +1,25 @@
+import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { CreateCardPageComponent } from './create-card-page.component';
 
-import { CreateCardFormComponent } from './create-card-page.component';
-
-describe('CreateCardFormComponent', () => {
-  let component: CreateCardFormComponent;
-  let fixture: ComponentFixture<CreateCardFormComponent>;
+describe('CreateCardPageComponent', () => {
+  let component: CreateCardPageComponent;
+  let fixture: ComponentFixture<CreateCardPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CreateCardFormComponent],
+      declarations: [CreateCardPageComponent],
+      imports: [HttpClientModule, StoreModule.forRoot({}), ReactiveFormsModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateCardFormComponent);
+    fixture = TestBed.createComponent(CreateCardPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

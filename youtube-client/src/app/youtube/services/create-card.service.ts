@@ -19,7 +19,7 @@ export class CreateCardService {
     date: new FormControl('', [Validators.required, checkDateValidator()]),
   });
   constructor(
-    private store: Store<{customCards: ICustomVideo[]}>,
+    private store: Store<{customVideos: ICustomVideo[]}>,
   ) { }
   public get title() {
     return this.card.get('title');

@@ -37,9 +37,13 @@ export interface ISnippet{
     thumbnails: IThumbnails
     title: string
 }
+export interface IItemId {
+    king: string
+    videoId: string
+}
 export interface IItem{
     etag:string
-    id:{kind: string, videoId: string}
+    id:IItemId
     kind:string
     snippet: ISnippet
     statistics: IStatistics

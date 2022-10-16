@@ -16,7 +16,7 @@ export class LeavePageGuard implements CanDeactivate<CreateCardPageComponent> {
     nextState?: RouterStateSnapshot,
   ):Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (component.createService.card.dirty) {
-      if (confirm('Are you sure? You\'ll lose unsaved data')) {
+      if (component.createService.card.dirty && confirm('Are you sure? You\'ll lose unsaved data')) {
         return true;
       }
     }

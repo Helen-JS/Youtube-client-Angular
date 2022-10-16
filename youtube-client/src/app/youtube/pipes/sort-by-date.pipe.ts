@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { SortType } from '../../core/models/sort-type';
 import { IItem } from '../../core/models/models';
-import { sortType } from '../../core/models/sort-type';
 
 @Pipe({
   name: 'sortByDate',
@@ -8,11 +8,11 @@ import { sortType } from '../../core/models/sort-type';
 export class SortByDatePipe implements PipeTransform {
   constructor() {}
 
-  transform(value: IItem[], str: sortType): IItem[] {
-    if (str === sortType.descending) {
+  transform(value: IItem[], str: SortType): IItem[] {
+    if (str === SortType.descending) {
       return value.sort((a, b) => Date.parse(b.snippet.publishedAt)
       - Date.parse(a.snippet.publishedAt));
-    } if (str === sortType.ascending) {
+    } if (str === SortType.ascending) {
       return value.sort((a, b) => Date.parse(a.snippet.publishedAt)
       - Date.parse(b.snippet.publishedAt));
     }

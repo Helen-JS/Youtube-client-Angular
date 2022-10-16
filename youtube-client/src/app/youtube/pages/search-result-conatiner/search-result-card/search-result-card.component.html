@@ -1,9 +1,9 @@
 <div  class="search-result-card">
     <img class="video-prewiew" [src]="srcImg" alt="video-prewiew">
 
-    <app-stat-bar [stat]="video.statistics"></app-stat-bar>
+    <app-stat-bar [stat]="stat"></app-stat-bar>
 
-    <h2 *ngIf="title.length < 40; else shortTitle">{{title}}</h2>
+    <h2 *ngIf="titleLength < 40; else shortTitle">{{title}}</h2>
 
     <ng-template #shortTitle>
       <h2>{{title | slice: 0:30}} ...</h2>

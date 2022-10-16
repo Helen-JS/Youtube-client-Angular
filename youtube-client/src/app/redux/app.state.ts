@@ -1,4 +1,4 @@
-import { IItem } from '../core/models/models';
+import { IItem, IResponse } from '../core/models/models';
 
 export interface ICustomVideo {
   title: string

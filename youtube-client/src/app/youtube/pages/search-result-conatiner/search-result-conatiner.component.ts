@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  debounceTime, distinctUntilChanged, filter, Subscription,
+  combineLatest,
+  debounceTime, distinctUntilChanged, filter, map, Observable, Subscription, switchMap,
 } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { updateApiResponse } from '../../../redux/actions/api-response.action';
 import { SortService } from '../../../core/services/sort.service';
 import { IItem } from '../../../core/models/models';
 import { YoutubeService } from '../../../core/services/youtube.service';
-import { ICustomVideo } from '../../../redux/app.state';
-import { selectCustomVideos } from '../../../redux/selectors/customVideos.selector';
-import { selectApiVideos } from '../../../redux/selectors/api-video.selector';
+import { IAppState, ICustomVideo } from '../../../redux/app.state';
 
 @Component({
   selector: 'app-search-result-conatiner',
@@ -17,13 +17,14 @@ import { selectApiVideos } from '../../../redux/selectors/api-video.selector';
 })
 
 export class SearchResultConatinerComponent implements OnInit, OnDestroy {
-  public videoList!:IItem[];
+  public videoList$!:Observable<IItem[]>;
+  public videoList!: IItem[];
   public customVideoList!: ICustomVideo[];
   private subscription!: Subscription;
   constructor(
     public youtubeService: YoutubeService,
     public sortService: SortService,
-    private store: Store,
+    private store: Store<IAppState>,
   ) { }
 
   ngOnInit(): void {
@@ -31,16 +32,12 @@ export class SearchResultConatinerComponent implements OnInit, OnDestroy {
       debounceTime(700),
       distinctUntilChanged(),
       filter((item) => item.length >= 3),
-    )
-      .subscribe({
-        next: (value) => {
-          this.youtubeService.getVideos(value).subscribe();
-          this.store.select(selectApiVideos)
-            .subscribe((videos) => this.videoList = videos);
-          this.store.select(selectCustomVideos)
-            .subscribe((customVideos) => this.customVideoList = customVideos);
-        },
-      });
+      map(() => this.store.dispatch(updateApiResponse())),
+      switchMap(() => this.store),
+    ).subscribe((data) => {
+      this.videoList = [...data.apiVideos];
+      this.customVideoList = [...data.customVideos];
+    });
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

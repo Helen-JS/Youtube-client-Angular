@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { sortType } from 'src/app/core/models/sort-type';
+import { SortType } from '../../core/models/sort-type';
 import { IItem } from '../../core/models/models';
 
 @Pipe({
@@ -8,11 +8,11 @@ import { IItem } from '../../core/models/models';
 export class SortByViewsPipe implements PipeTransform {
   constructor() {}
 
-  transform(value: IItem[], str: sortType): IItem[] {
-    if (str === sortType.descending) {
+  transform(value: IItem[], str: SortType): IItem[] {
+    if (str === SortType.descending) {
       return value.sort((a, b) => Number(b.statistics.viewCount)
       - Number(a.statistics.viewCount));
-    } if (str === sortType.ascending) {
+    } if (str === SortType.ascending) {
       return value.sort((a, b) => Number(a.statistics.viewCount)
       - Number(b.statistics.viewCount));
     }

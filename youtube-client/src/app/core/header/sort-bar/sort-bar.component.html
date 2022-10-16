@@ -1,7 +1,7 @@
 <div class="sort-bar">
     <p>Sorting by:</p>
-    <p (click)="changeDateSort()"><button class="sort-item">date</button></p>
-    <p (click)="changeViewsSort()"><button class="sort-item">count of views</button></p>
+    <p (click)="changeDateSort()"><button class="sort-item" id="date-sort-btn">date</button></p>
+    <p (click)="changeViewsSort()"><button class="sort-item" id="views-sort-btn">count of views</button></p>
     <p><button class="sort-item">by word or sentance</button></p>
     <p><input class="search-field" type="search" [(ngModel)]="sort.currentSortWord"></p>
 </div>
